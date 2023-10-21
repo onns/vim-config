@@ -1,0 +1,14 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "args": ["-remote=unix;/tmp/gopls-daemon-socket"],
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  },
+  "go.goplsArgs": ["-remote", "unix;/tmp/gopls-daemon-socket"],
+  "suggest.noselect": false,
+  "coc.preferences.diagnostic.displayByAle": true,
+  "suggest.floatEnable": true
+}
