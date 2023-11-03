@@ -26,3 +26,5 @@ vim.api.nvim_set_keymap('i', '<C-g> <esc>', ':<C-u>GoDeclsDir<CR>', { silent = t
 -- tagbar 打开后自动聚焦
 vim.g.tagbar_autofocus = 1
 
+
+vim.opt.wrap = true

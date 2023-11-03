@@ -61,5 +61,8 @@ return {
     },
     {
         "mhinz/vim-startify"
-    }
+    },
+    {
+        'wakatime/vim-wakatime'
+    },
 }
