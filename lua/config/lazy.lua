@@ -2,7 +2,8 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
   -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
+    lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
@@ -48,10 +49,14 @@ require("lazy").setup({
 require('gitsigns').setup({
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
-      virt_text = true,
-      virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-      delay = 100,
-      ignore_whitespace = false,
-      virt_text_priority = 100,
+    virt_text = true,
+    virt_text_pos = 'eol',   -- 'eol' | 'overlay' | 'right_align'
+    delay = 100,
+    ignore_whitespace = false,
+    virt_text_priority = 100,
   },
 })
+
+require'lspconfig'.gopls.setup{
+  cmd = {"gopls", "-remote=unix;/tmp/gopls-daemon-socket"}
+}
