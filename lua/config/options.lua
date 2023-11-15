@@ -23,9 +23,9 @@ vim.g.go_referrers_mode = 'gopls'
 -- vim.api.nvim_set_keymap('n', 'gm', ':GoImplements', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-g>', ':GoDeclsDir<CR>', { silent = true })
 vim.api.nvim_set_keymap('i', '<C-g> <esc>', ':<C-u>GoDeclsDir<CR>', { silent = true })
-vim.api.nvim_set_keymap('n', 'gd', "<Plug>(coc-definition)", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gr', "<Plug>(coc-references)", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gm', "<Plug>(coc-implementation)", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'gd', "<Plug>(coc-definition)", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'gr', "<Plug>(coc-references)", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'gm', "<Plug>(coc-implementation)", { noremap = true, silent = true })
 
 -- tagbar 打开后自动聚焦
 vim.g.tagbar_autofocus = 1

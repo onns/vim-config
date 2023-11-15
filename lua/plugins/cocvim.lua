@@ -1,9 +1,9 @@
 return {
-    {
-        'neoclide/coc.nvim',
-        branch = 'master',
-        build = "yarn install --frozen-lockfile",
-    },
+    -- {
+    --     'neoclide/coc.nvim',
+    --     branch = 'master',
+    --     build = "yarn install --frozen-lockfile",
+    -- },
     {
         'onns/bookmarks.nvim',
         keys = {
