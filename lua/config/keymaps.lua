@@ -2,6 +2,37 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+function SaveHttpResp()
+    -- 获取当前时间并格式化为时间戳
+    local timestamp = os.date("%Y%m%d%H%M%S")
+
+    -- 获取当前文件的目录路径
+    local current_path = vim.fn.expand('%:p:h')
+
+    -- 定位到 rest.nvim 的响应缓冲区
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        print(vim.bo[bufnr].filetype)
+        if vim.bo[bufnr].filetype == 'httpResult' then
+            -- 设置保存文件的完整路径，包含时间戳
+            local filename = current_path .. "/response_" .. timestamp .. ".txt"
+            vim.api.nvim_buf_call(bufnr, function()
+                vim.cmd('w ' .. filename)
+            end)
+            print("Response saved to " .. filename)
+            break
+        end
+    end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>rr',
+    "<cmd>lua require('rest-nvim').run()<CR>",
+    { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>rs',
+    ":lua SaveHttpResp()<CR>",
+    { noremap = true, silent = true })
+
+
 function GetGoplsRootDir()
     local clients = vim.lsp.get_active_clients()
     for _, client in ipairs(clients) do
