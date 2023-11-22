@@ -2,6 +2,10 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+-- 拼写检查
+-- vim.opt.spell = true
+-- vim.opt.spelllang = "en_us"
+
 vim.g.go_fmt_command = 'goimports'
 vim.g.go_fillstruct_mode = 'gopls'
 vim.g.go_autodetect_gopath = 1

@@ -11,10 +11,9 @@ function SaveHttpResp()
 
     -- 定位到 rest.nvim 的响应缓冲区
     for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-        print(vim.bo[bufnr].filetype)
         if vim.bo[bufnr].filetype == 'httpResult' then
             -- 设置保存文件的完整路径，包含时间戳
-            local filename = current_path .. "/response_" .. timestamp .. ".txt"
+            local filename = current_path .. "/log/response_" .. timestamp .. ".txt"
             vim.api.nvim_buf_call(bufnr, function()
                 vim.cmd('w ' .. filename)
             end)
@@ -25,7 +24,7 @@ function SaveHttpResp()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>rr',
-    "<cmd>lua require('rest-nvim').run()<CR>",
+    ":lua require('rest-nvim').run()<CR>",
     { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>rs',
@@ -80,3 +79,21 @@ function ExportExpandToClipboard()
 end
 
 vim.api.nvim_set_keymap('n', 'gcr', ':lua ExportExpandToClipboard()<CR>', { noremap = true })
+
+
+local function check_spelling()
+    -- 保存当前文件
+    vim.cmd('write')
+
+    -- 获取当前文件的路径
+    local current_file = vim.fn.expand('%')
+
+    -- 构建CSpell命令
+    local command = 'cspell --config /Users/onns/.onns/weiyun/code/config/vim/cspell.yaml ' .. current_file
+
+    -- 在新的终端窗口中执行CSpell
+    vim.cmd('split | terminal ' .. command)
+end
+
+-- 将Lua函数绑定到Neovim命令
+vim.api.nvim_create_user_command('SpellCheck', check_spelling, {})

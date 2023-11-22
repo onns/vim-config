@@ -1,5 +1,5 @@
 return {
-    "rest-nvim/rest.nvim",
+    "git@github.com:onns/rest.nvim.git",
     dependencies = { { "nvim-lua/plenary.nvim" } },
     config = function()
         require("rest-nvim").setup({
