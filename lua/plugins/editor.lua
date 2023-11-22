@@ -1,6 +1,6 @@
 return {
     {
-        "lewis6991/gitsigns.nvim",
+        "git@github.com:lewis6991/gitsigns.nvim.git",
         event = "LazyFile",
         opts = {
             signs = {

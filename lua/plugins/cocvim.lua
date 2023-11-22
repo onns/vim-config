@@ -5,7 +5,7 @@ return {
     --     build = "yarn install --frozen-lockfile",
     -- },
     {
-        'onns/bookmarks.nvim',
+        'git@github.com:onns/bookmarks.nvim.git',
         keys = {
             { "<tab><tab>", mode = { "n" } },
         },
@@ -35,7 +35,7 @@ return {
     --     end
     -- },
     {
-        "navarasu/onedark.nvim",
+        "git@github.com:navarasu/onedark.nvim.git",
         lazy = false,
         config = function()
             require('onedark').setup {
@@ -45,13 +45,13 @@ return {
         end
     },
     {
-        'fatih/vim-go'
+        'git@github.com:fatih/vim-go.git'
     },
     {
-        "junegunn/fzf"
+        "git@github.com:junegunn/fzf.git"
     },
     {
-        "majutsushi/tagbar",
+        "git@github.com:majutsushi/tagbar.git",
         keys = {
             {
                 "<leader>t",
@@ -61,9 +61,9 @@ return {
         }
     },
     {
-        "mhinz/vim-startify", lazy = false
+        "git@github.com:mhinz/vim-startify.git", lazy = false
     },
     {
-        'wakatime/vim-wakatime'
+        'git@github.com:wakatime/vim-wakatime.git'
     },
 }

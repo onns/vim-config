@@ -3,7 +3,7 @@ return {
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
   {
-    "nvim-treesitter/nvim-treesitter",
+    "git@github.com:nvim-treesitter/nvim-treesitter.git",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     event = { "LazyFile", "VeryLazy" },
@@ -18,7 +18,7 @@ return {
     end,
     dependencies = {
       {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+        "git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
         config = function()
           -- When in diff mode, we want to use the default
           -- vim text objects c & C instead of the treesitter ones.
@@ -117,7 +117,7 @@ return {
 
   -- Show context of the current function
   {
-    "nvim-treesitter/nvim-treesitter-context",
+    "git@github.com:nvim-treesitter/nvim-treesitter-context.git",
     event = "LazyFile",
     enabled = true,
     opts = { mode = "cursor", max_lines = 3 },
@@ -141,7 +141,7 @@ return {
 
   -- Automatically add closing tags for HTML and JSX
   {
-    "windwp/nvim-ts-autotag",
+    "git@github.com:windwp/nvim-ts-autotag.git",
     event = "LazyFile",
     opts = {},
   },
