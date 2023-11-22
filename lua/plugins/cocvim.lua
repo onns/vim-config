@@ -36,6 +36,7 @@ return {
     -- },
     {
         "navarasu/onedark.nvim",
+        lazy = false,
         config = function()
             require('onedark').setup {
                 style = 'darker'
@@ -60,7 +61,7 @@ return {
         }
     },
     {
-        "mhinz/vim-startify"
+        "mhinz/vim-startify", lazy = false
     },
     {
         'wakatime/vim-wakatime'
