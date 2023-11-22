@@ -1,6 +1,6 @@
 return {
     "git@github.com:onns/rest.nvim.git",
-    dependencies = { { "nvim-lua/plenary.nvim" } },
+    dependencies = { { "git@github.com:nvim-lua/plenary.nvim.git" } },
     config = function()
         require("rest-nvim").setup({
             -- Open request results in a horizontal split
