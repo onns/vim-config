@@ -10,7 +10,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "git@github.com:onns/LazyVim.git", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
     -- { import = "lazyvim.plugins.extras.lang.json" },
@@ -46,19 +46,19 @@ require("lazy").setup({
   },
 })
 
-require('gitsigns').setup({
+require("gitsigns").setup({
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
     delay = 100,
     ignore_whitespace = false,
     virt_text_priority = 100,
   },
 })
 
-require 'lspconfig'.gopls.setup {
-  cmd = { "gopls", "-remote=unix;/tmp/gopls-daemon-socket" }
-}
+require("lspconfig").gopls.setup({
+  cmd = { "gopls", "-remote=unix;/tmp/gopls-daemon-socket" },
+})
 
-require 'lspconfig'.bufls.setup {}
+require("lspconfig").bufls.setup({})
