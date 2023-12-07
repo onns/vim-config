@@ -36,3 +36,5 @@ vim.g.tagbar_autofocus = 1
 
 
 vim.opt.wrap = true
+
+vim.g.startify_files_number = 25
