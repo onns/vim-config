@@ -99,8 +99,8 @@ end
 vim.api.nvim_create_user_command('SpellCheck', check_spelling, {})
 
 vim.api.nvim_set_keymap('n', '<leader>pj',
-    [[:.s/\v(\w+) (\w+) \= (\d+);/\1 \2 = \3 [(gogoproto.jsontag) = '\2', json_name = '\2'];<CR>]],
+    [[:.s/\v(\w+) (\w+) \= (\d+).*;/\1 \2 = \3 [(gogoproto.jsontag) = '\2', json_name = '\2'];<CR>]],
     { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>pf',
-    [[:.s/\v(\w+) (\w+) \= (\d+);/\1 \2 = \3 [(gogoproto.moretags) = 'form:"\2"',(gogoproto.jsontag) = '\2', json_name = '\2'];<CR>]],
+    [[:.s/\v(\w+) (\w+) \= (\d+).*;/\1 \2 = \3 [(gogoproto.moretags) = 'form:"\2"',(gogoproto.jsontag) = '\2', json_name = '\2'];<CR>]],
     { noremap = true, silent = true })
