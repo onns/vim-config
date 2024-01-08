@@ -6,7 +6,7 @@
 -- vim.opt.spell = true
 -- vim.opt.spelllang = "en_us"
 
-vim.g.go_fmt_command = "goimports"
+vim.g.go_fmt_command = "gofmt"
 vim.g.go_fillstruct_mode = "gopls"
 vim.g.go_autodetect_gopath = 1
 vim.g.go_highlight_types = 1
@@ -15,8 +15,8 @@ vim.g.go_highlight_functions = 1
 vim.g.go_highlight_function_calls = 1
 vim.g.go_highlight_extra_types = 1
 vim.g.go_highlight_generate_tags = 1
-
 vim.g.go_gopls_enabled = 1
+vim.g.go_imports_autosave = 0
 vim.g.go_gopls_options = { "-remote=unix;/tmp/gopls-daemon-socket" }
 vim.g.go_def_mode = "gopls"
 vim.g.go_info_mode = "gopls"
