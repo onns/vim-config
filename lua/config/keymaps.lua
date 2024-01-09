@@ -104,3 +104,82 @@ vim.api.nvim_set_keymap('n', '<leader>pj',
 vim.api.nvim_set_keymap('n', '<leader>pf',
     [[:.s/\v(\w+) (\w+) \= (\d+).*;/\1 \2 = \3 [(gogoproto.moretags) = 'form:"\2"',(gogoproto.jsontag) = '\2', json_name = '\2'];<CR>]],
     { noremap = true, silent = true })
+
+function TodoTelescopeWithCWD()
+    local pwd = vim.fn.getcwd()
+    local goplsRootDir = GetGoplsRootDir()
+    if goplsRootDir then
+        pwd = goplsRootDir
+    end
+    print('TodoTelescope at : ' .. pwd)
+    vim.cmd("TodoTelescope cwd=" .. pwd)
+end
+
+vim.api.nvim_set_keymap('n', '<leader>fw', ':lua TodoTelescopeWithCWD()<CR>', { noremap = true })
+
+-- 待定列表
+local targets = { "cmd", "CHANGELOG.md" }
+
+-- 检查文件或目录是否存在
+local function file_exists(path)
+    local ok, err, code = os.rename(path, path)
+    if not ok then
+        if code == 13 then
+            -- Permission denied, but it exists
+            return true
+        end
+    end
+    return ok, err
+end
+
+-- 从当前路径向上查找目标文件或目录
+local function find_upwards()
+    -- 获取当前文件的路径
+    local path = vim.fn.expand('%:p:h')
+
+    while path and path ~= '' do
+        -- 检查目标文件或目录是否在当前路径
+        for _, target in pairs(targets) do
+            local fullpath = path .. '/' .. target
+            if file_exists(fullpath) then
+                return path
+            end
+        end
+
+        -- 移动到上一级目录
+        path = vim.fn.fnamemodify(path, ':h')
+    end
+    return nil
+end
+
+function TodoTelescopeWithProject()
+    local pwd = vim.fn.getcwd()
+    local projectDir = find_upwards()
+    if projectDir then
+        pwd = projectDir
+    end
+    print('TodoTelescope at : ' .. pwd)
+    vim.cmd("TodoTelescope cwd=" .. pwd)
+end
+
+vim.api.nvim_set_keymap('n', '<leader>fp', ':lua TodoTelescopeWithProject()<CR>', { noremap = true })
+
+
+function InsertGitBranch()
+    local cwd = vim.fn.getcwd()
+    local git_branch_cmd = "git -C " .. cwd .. " branch --show-current"
+    local handle = io.popen(git_branch_cmd)
+    local git_branch = handle:read("*a")
+    handle:close()
+    git_branch = git_branch:gsub("%s+$", "")
+    if git_branch ~= "" then
+        -- vim.api.nvim_put({ git_branch }, "", false, true)
+        local line_num = vim.api.nvim_win_get_cursor(0)[1]
+        local todo_info = "// TODO: onns " .. git_branch .. " "
+        vim.api.nvim_buf_set_lines(0, line_num - 1, line_num - 1, false, { todo_info })
+        vim.api.nvim_command('startinsert')
+        vim.api.nvim_win_set_cursor(0, { line_num, #todo_info })
+    end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>ig', ':lua InsertGitBranch()<CR>', { noremap = true })
