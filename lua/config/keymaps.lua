@@ -183,3 +183,37 @@ function InsertGitBranch()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>ig', ':lua InsertGitBranch()<CR>', { noremap = true })
+
+
+local ts_utils = require 'nvim-treesitter.ts_utils'
+
+function JumpToFunctionName()
+    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('[f', true, true, true), 'm', true)
+    local node = ts_utils.get_node_at_cursor()
+
+    while node do
+        -- print(node:type())
+        if node:type() == "function_declaration" or node:type() == "method_declaration" then
+            local child_count = node:child_count()
+            for i = 0, child_count - 1 do
+                local child = node:child(i)
+                -- print("Child " .. i .. ": " .. child:type())
+                if child then
+                    if node:type() == "function_declaration" and child:type() == "identifier" then
+                        local start_row, start_col, _, _ = child:range()
+                        vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+                        return
+                    end
+                    if node:type() == "method_declaration" and child:type() == "field_identifier" then
+                        local start_row, start_col, _, _ = child:range()
+                        vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+                        return
+                    end
+                end
+            end
+        end
+        node = node:parent()
+    end
+end
+
+vim.api.nvim_set_keymap('n', '[n', '<cmd>lua JumpToFunctionName()<CR>', { noremap = true, silent = true })
