@@ -87,6 +87,7 @@ local function check_spelling()
 
     -- 获取当前文件的路径
     local current_file = vim.fn.expand('%')
+    print('Spell check in: ' .. current_file)
 
     -- 构建CSpell命令
     local command = 'cspell --config /Users/onns/.onns/weiyun/code/config/vim/cspell.yaml ' .. current_file
@@ -118,7 +119,7 @@ end
 vim.api.nvim_set_keymap('n', '<leader>fw', ':lua TodoTelescopeWithCWD()<CR>', { noremap = true })
 
 -- 待定列表
-local targets = { "cmd", "CHANGELOG.md" }
+local targets = { "cmd", "CHANGELOG.md", "go.mod", ".git" }
 
 -- 检查文件或目录是否存在
 local function file_exists(path)
