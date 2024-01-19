@@ -86,11 +86,12 @@ local function check_spelling()
     vim.cmd('write')
 
     -- 获取当前文件的路径
-    local current_file = vim.fn.expand('%')
+    local current_file = vim.fn.expand('%:p')
     print('Spell check in: ' .. current_file)
 
     -- 构建CSpell命令
-    local command = 'cspell --config /Users/onns/.onns/weiyun/code/config/vim/cspell.yaml ' .. current_file
+    local command = 'cspell --config /Users/onns/.onns/weiyun/code/config/vim/cspell.yaml -r "/Users/onns" ' ..
+        current_file
 
     -- 在新的终端窗口中执行CSpell
     vim.cmd('split | terminal ' .. command)
