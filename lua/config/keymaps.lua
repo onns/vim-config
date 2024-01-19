@@ -218,3 +218,34 @@ function JumpToFunctionName()
 end
 
 vim.api.nvim_set_keymap('n', '[n', '<cmd>lua JumpToFunctionName()<CR>', { noremap = true, silent = true })
+
+function GetGoImportPath()
+    local current_file = vim.api.nvim_buf_get_name(0)
+    local current_path = vim.fn.fnamemodify(current_file, ":h")
+    local go_mod_path = vim.fn.findfile("go.mod", current_path .. ";")
+    if go_mod_path == "" then
+        return
+    end
+
+    local go_mod_content = vim.fn.readfile(go_mod_path)
+    local module_name = nil
+    for _, line in ipairs(go_mod_content) do
+        module_name = line:match("^module%s+(%S+)")
+        if module_name then
+            break
+        end
+    end
+    if not module_name then
+        return
+    end
+
+    local module_root = vim.fn.fnamemodify(go_mod_path, ":h")
+
+    local package_path = string.sub(current_path, string.len(module_root .. '/') + 1)
+
+    local import_package_name = module_name .. "/" .. package_path
+    vim.fn.setreg('+', import_package_name)
+    print("Import path copied to clipboard: " .. import_package_name)
+end
+
+vim.api.nvim_set_keymap('n', 'gcp', ':lua GetGoImportPath()<CR>', { noremap = true })
