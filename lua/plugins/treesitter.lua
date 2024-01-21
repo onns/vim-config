@@ -78,6 +78,7 @@ return {
         "yaml",
         "go",
         "http",
+        "sql",
       },
       incremental_selection = {
         enable = true,
