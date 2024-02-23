@@ -5,10 +5,8 @@ return {
     --     build = "yarn install --frozen-lockfile",
     -- },
     {
-        'git@github.com:onns/bookmarks.nvim.git',
-        keys = {
-            { "<tab><tab>", mode = { "n" } },
-        },
+        'onns/bookmarks.nvim',
+        keys = {},
         branch = 'main',
         dependencies = { 'nvim-web-devicons' },
         config = function()

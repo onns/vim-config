@@ -250,3 +250,7 @@ function GetGoImportPath()
 end
 
 vim.api.nvim_set_keymap('n', 'gcp', ':lua GetGoImportPath()<CR>', { noremap = true })
+
+vim.api.nvim_set_keymap('n', '<leader>fm',
+    ":lua require('bookmarks').toggle_bookmarks()<CR>",
+    { noremap = true, silent = true })
