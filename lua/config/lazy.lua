@@ -62,3 +62,10 @@ require("lspconfig").gopls.setup({
 })
 
 require("lspconfig").bufls.setup({})
+
+-- https://github.com/hrsh7th/nvim-cmp/issues/1809
+-- gopls 在返回提示词的时候随机选择，理论上应该默认选第一个
+local cmp = require("cmp")
+cmp.setup({
+  preselect = cmp.PreselectMode.None
+})
