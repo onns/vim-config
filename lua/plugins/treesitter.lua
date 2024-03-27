@@ -3,22 +3,22 @@ return {
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
   {
-    "git@github.com:nvim-treesitter/nvim-treesitter.git",
+    "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
     event = { "LazyFile", "VeryLazy" },
     init = function(plugin)
       -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
       -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treeitter** module to be loaded in time.
-      -- Luckily, the only thins that those plugins need are the custom queries, which we make available
+      -- no longer trigger the **nvim-treesitter** module to be loaded in time.
+      -- Luckily, the only things that those plugins need are the custom queries, which we make available
       -- during startup.
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
     end,
     dependencies = {
       {
-        "git@github.com:nvim-treesitter/nvim-treesitter-textobjects.git",
+        "nvim-treesitter/nvim-treesitter-textobjects",
         config = function()
           -- When in diff mode, we want to use the default
           -- vim text objects c & C instead of the treesitter ones.
@@ -75,6 +75,7 @@ return {
         "typescript",
         "vim",
         "vimdoc",
+        "xml",
         "yaml",
         "go",
         "http",
@@ -118,7 +119,7 @@ return {
 
   -- Show context of the current function
   {
-    "git@github.com:nvim-treesitter/nvim-treesitter-context.git",
+    "nvim-treesitter/nvim-treesitter-context",
     event = "LazyFile",
     enabled = true,
     opts = { mode = "cursor", max_lines = 3 },
@@ -126,13 +127,12 @@ return {
       {
         "<leader>ut",
         function()
-          local Util = require("lazyvim.util")
           local tsc = require("treesitter-context")
           tsc.toggle()
-          if Util.inject.get_upvalue(tsc.toggle, "enabled") then
-            Util.info("Enabled Treesitter Context", { title = "Option" })
+          if LazyVim.inject.get_upvalue(tsc.toggle, "enabled") then
+            LazyVim.info("Enabled Treesitter Context", { title = "Option" })
           else
-            Util.warn("Disabled Treesitter Context", { title = "Option" })
+            LazyVim.warn("Disabled Treesitter Context", { title = "Option" })
           end
         end,
         desc = "Toggle Treesitter Context",
@@ -142,7 +142,7 @@ return {
 
   -- Automatically add closing tags for HTML and JSX
   {
-    "git@github.com:windwp/nvim-ts-autotag.git",
+    "windwp/nvim-ts-autotag",
     event = "LazyFile",
     opts = {},
   },
